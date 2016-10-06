@@ -5,8 +5,8 @@ document.getElementById("auth_button").addEventListener("click", function(){
 authorize();
 
 });
-}, false);
-
+}, false);  
+ 
 // stuff for auth function
 this.hostName = window.location.host.replace(/.safenet$/g, '');
 this.LOCAL_STORAGE_TOKEN_KEY = SAFE_TOKEN_${this.hostName};
