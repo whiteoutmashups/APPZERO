@@ -12,10 +12,10 @@ document.addEventListener('DOMContentLoaded', function() {
 function authorize() {
 const app =
 {
-    name: "name",
+    name: "SUCCESS!!!!!!!",
     id: "id",
-    version: "v",
-    vendor: "vendor_name",
+    version: "0.0.0.0.0.0.0.0.1",
+    vendor: "SUCCESSFULMAN!!!",
     permissions: ["SAFE_DRIVE_ACCESS"]
 };
 
