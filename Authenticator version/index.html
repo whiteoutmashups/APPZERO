@@ -1,0 +1,35 @@
+<body><script>
+//Intial function
+"Use strict";
+
+/*
+*              		   New Safe JS App Zero
+*/
+const app = {
+ id: "net.app.zero",
+ name: "Safe Web Demo",
+ version: '1',
+ vendor: "Joe",
+};
+
+var permissions = {
+ _public: ['Read']
+};
+
+(function() {
+ console.log('Initialising website');
+ window.safeApp.initialise(app)
+   .then((appInit) => {
+     console.log("Initialise Token :" + appInit);
+     console.log("Authorising website");
+     window.safeApp.authorise(appInit, permissions)
+       .then((auth) => {
+         alert(auth);
+       }, (err) => {
+         console.error(err);
+       });
+   })
+   ((err) => {
+     console.error(err);
+   });
+})();</script></body>

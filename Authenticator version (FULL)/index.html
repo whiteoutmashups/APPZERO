@@ -1,0 +1,99 @@
+<head>
+  <title>APP ZERO</title>
+</head>
+
+
+
+<body>
+
+<center><h1>APP ZERO</h1>
+
+<button onClick="init()">INITIALIZE</button>
+
+<br><br><button onClick="connect()">CONNECT</button>
+
+<br><br><button onClick="authorize()">AUTHORIZE</button>
+
+<br><br><button onClick="connectauth()">CONNECT AUTH</button>
+
+<div id="console"></div>
+
+  </center><script>
+//Intial function
+"Use strict";
+
+/*
+*              		   New Safe JS App Zero
+*/
+
+function init() {
+const app = {
+ id: "wom.app.zero",
+ name: "APP ZERO!!",
+ version: '0.0.1',
+ vendor: "SUCCESSMAN!!!",
+};
+
+var permissions = {
+ _public: ['Read']
+};
+
+(function() {
+ document.getElementById('console').innerHTML = 'Initialising website';
+ window.safeApp.initialise(app)
+   .then((appInit) => {
+     document.getElementById('console').innerHTML = "Initialise Token:" + appInit + "<br>Authorized Website";
+     window.safeApp.authorise(appInit, permissions)
+       .then((auth) => {
+         alert(auth);
+       }, (err) => {
+         document.getElementById('console').innerHTML = err;
+       });
+   })
+   ((err) => {
+     document.getElementById('console').innerHTML = err;
+   });
+})();
+};
+
+function connect() {
+window.safeApp.initialise({
+   id: 'net.maidsafe.test.webapp.id',
+   name: 'WebApp Test',
+   vendor: 'MaidSafe Ltd.'
+})
+.then((appToken) => window.safeApp.connect(appToken))
+.then(_ => {
+   document.getElementById('console').innerHTML = 'Unregistered session created';
+});
+};
+
+function authorize() {
+  window.safeApp.authorise(
+   appToken, // the app token obtained when invoking `initialise`
+   {
+     _public: ['Insert'], // request to insert into `_public` container
+     _other: ['Insert', 'Update'] // request to insert and update in `_other` container
+   },
+   {own_container: true} // and we want our own container, too
+).then((authUri) => {
+   document.getElementById('console').innerHTML = 'App was authorised and auth URI received: ', authUri;
+});
+};
+
+function connectauth() {
+window.safeApp.authorise(
+   appToken, // the app token obtained when invoking `initialise`
+   {
+     _public: ['Insert'], // request to insert into `_public` container
+     _other: ['Insert', 'Update'] // request to insert and update in `_other` container
+   },
+   {own_container: true} // and we want our own container, too
+)
+.then((authUri) => window.safeApp.connectAuthorised(appToken, authUri))
+.then(_ => {
+   document.getElementById('console').innerHTML = 'The app was authorised a session was created with the network';
+});
+};
+
+</script></body>
